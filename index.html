@@ -78,20 +78,21 @@
             </p>
 
             <div class="pure-g">
-                <div class="pure-u-1-4">
-                    <img class="pure-img-responsive" src="http://farm3.staticflickr.com/2875/9069037713_1752f5daeb.jpg" alt="Peyto Lake">
-                </div>
-                <div class="pure-u-1-4">
-                    <img class="pure-img-responsive" src="http://farm3.staticflickr.com/2813/9069585985_80da8db54f.jpg" alt="Train">
-                </div>
-                <div class="pure-u-1-4">
-                    <img class="pure-img-responsive" src="http://farm6.staticflickr.com/5456/9121446012_c1640e42d0.jpg" alt="T-Shirt Store">
-                </div>
-                <div class="pure-u-1-4">
-                    <img class="pure-img-responsive" src="http://farm8.staticflickr.com/7357/9086701425_fda3024927.jpg" alt="Mountain">
-                </div>
-            </div>
+                <div class="pure-u-1">
+                    <img class="pure-img-responsive" src="http://res.cloudinary.com/techblogpics/image/upload/v1418431130/bart-50_ufttkq.png" alt = "bart image" width="1140" height="1038" border="0" usemap="#map">
 
+                    <map name="map">
+                        <area shape="circle" coords="330,156,15" alt="Richmond" onmouseover="mover()" onmouseout="mout()" href="#richmond" />
+                        <area shape="circle" coords="365,407,16" alt="woak"   onmouseover="mover()" onmouseout="mout()"  href="#richmond"/>
+                        <area shape="circle" coords="476,275,9" alt="alt text"  onmouseover="mover()" onmouseout="mout()" href="#richmond" />
+                        <area shape="circle" coords="527,246,8" alt="orinda"  onmouseover="mover()" onmouseout="mout()" href="#richmond" />
+                        <area shape="circle" coords="685,148,8" alt="Pleasant Hill"  onmouseover="mover()" onmouseout="mout()" href="#richmond"/>
+                        <area shape="rect" coords="414,311,448,322" alt="Macaruthur"  onmouseover="mover()" onmouseout="mout()" href="#richmond" />
+                        <area shape="circle" coords="837,56,10" alt="Pittsburg/Bay Point"  onmouseover="mover()" onmouseout="mout()" href="#richmond"/>
+                        <area shape="rect" coords="256,727,282,749" alt="Millbrae"  onmouseover="mover()" onmouseout="mout()"  href="#richmond" />
+                    </map>
+                </div>
+            </div
 
         </div>
     </div>
@@ -99,10 +100,21 @@
 
 
 
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="./js/jquery.rwdImageMaps.min.js"></script>
+<!-- <script src="./js/ios-orientationchange-fix.min.js"></script> -->
+<script src="./js/ui.js"></script>
+<script type="text/javascript">
 
+    $(function() {
+        $('img[usemap]').rwdImageMaps();
 
-<script src="js/ui.js"></script>
+        $('area').on('click', function() {
+            alert($(this).attr('alt') + ' clicked');
+        });
+    });
 
+</script>
 
 </body>
 </html>
