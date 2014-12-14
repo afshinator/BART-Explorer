@@ -50,6 +50,8 @@
                 <li><a href="#">Preferences</a></li>
             </ul>
         </div>
+        <div id="infoArea">
+        </div>
     </div>
 
     <div id="main">
@@ -166,7 +168,9 @@
         var origin, 
             dest,
             $origin = $('#origin'),
-            $dest = $('#dest');
+            $dest = $('#dest')
+            $info = $('#infoArea'),
+            $fare = $('#fare');
 
 
 
@@ -221,6 +225,17 @@
             //   str += $( this ).text() + " ";
             // });
             // console.log( str);
+        });
+
+        $fare.click(function(){
+            var url = 'http://api.bart.gov/api/sched.aspx?cmd=fare&orig=' + origin + '&dest=' + dest;
+            console.log('Going to ping Bart');
+            $.get( url, function( data ) {
+                var txt = '<p>fare: $' + $(data).find('fare').text() + '</p>';
+                txt += '<small>From ' + origin + ' to ' + dest + '</small>';
+                $info.empty().append( txt );
+                console.log( 'fare : $' + $(data).find('fare').text() );
+            });
         });
 
     });
