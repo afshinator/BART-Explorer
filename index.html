@@ -26,7 +26,7 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
-
+<link rel="stylesheet" href="./css/app.css">
 
 </head>
 <body>
@@ -42,12 +42,12 @@
 
     <div id="menu">
         <div class="pure-menu pure-menu-open">
-            <a class="pure-menu-heading" href="#">BART Explorer</a>
+            <a class="pure-menu-heading" href="#">BARTGoer <i class="fa fa-bus"></i></a>
 
             <ul>
                 <li class="menu-item-divided pure-menu-selected"><a href="#">Home</a></li>
                 <li><a href="#">About</a></li>
-                <li><a href="#">Preferences</a></li>
+                <li><a href="#"><i class="fa fa-cogs"></i> Settings</a></li>
             </ul>
         </div>
         <div id="infoArea">
@@ -56,7 +56,7 @@
 
     <div id="main">
         <div class="header">
-            <h1>BART Explorer</h1>
+            <h1>BARTGoer</h1>
         </div>
 
 
@@ -65,22 +65,40 @@
                 <fieldset>
                     <!-- <legend>Choose your Start and Destination Stations</legend> -->
                     <div class="pure-g">
-                        <div class="pure-u-1 pure-u-sm-1-2">
+                        <div class="pure-u-1 pure-u-sm-2-5">
                             <label for="start">Starting Point</label>
                             <select id="origin">
                             </select>
                         </div>
-                        <div class="pure-u-1 pure-u-sm-1-2">                        
+                        <div class="pure-u-1 pure-u-sm-2-5">                        
                             <label for="dest">Destination</label>
                             <select id="dest">
                                 <!-- <option val="">Richmond</option> -->
                             </select>
                         </div>
+                        <div class="pure-u-1 pure-u-sm-1-5">                        
+<form class="pure-form">
+    <label for="option-one" class="pure-checkbox">
+        <input id="option-one" type="checkbox" value="">
+        Some option
+    </label>
+</form>
+                        </div>                        
                     </div>
+                    <br>
                     <div class="pure-g">
                         <button id="fare" class="pure-button fonts">
-                            <i class="fa fa-usd"></i>    
+                            <i class="fa fa-usd"></i>
+                            Fare  
                         </button>
+                        <button id="arrive" class="pure-button fonts">
+                            <i class="fa fa-level-down"></i>
+                            Arrive  
+                        </button>
+                        <button id="depart" class="pure-button fonts">
+                            <i class="fa fa-level-up"></i>
+                            Depart  
+                        </button>                                                
                     </div>
                 </fieldset>
             </form>
@@ -164,13 +182,26 @@
     'SPCL': 'Special'
   };
 
+    function supports_html5_storage() {
+      try {
+        return 'localStorage' in window && window['localStorage'] !== null;
+      } catch (e) {
+        return false;
+      }
+    }
+
+
+
+
     $(function() {
         var origin, 
             dest,
+            savedPrefs = false;
             $origin = $('#origin'),
             $dest = $('#dest')
             $info = $('#infoArea'),
-            $fare = $('#fare');
+            $fare = $('#fare'),
+            $arrive = $('#arrive');
 
 
 
@@ -192,8 +223,16 @@
         };
 
         var init = function() {
+            var storageData = {};
+
             fillSelectControl();            
             getOriginDest();
+            if ( ! supports_html5_storage() ) console.err('No localStorage');
+            else {
+                if ( localStorage.bartgoer !== undefined ) {
+                    storageData = JSON.parse( localStorage.bartgoear );
+                }
+            }
         }();
 
 
@@ -228,15 +267,33 @@
         });
 
         $fare.click(function(){
-            var url = 'http://api.bart.gov/api/sched.aspx?cmd=fare&orig=' + origin + '&dest=' + dest;
-            console.log('Going to ping Bart');
+            var url = 'http://api.bart.gov/api/sched.aspx?cmd=fare&orig=' + origin + '&dest=' + dest,
+                thisCache = $(this);
+
+            thisCache.addClass('button-warning');
             $.get( url, function( data ) {
                 var txt = '<p>fare: $' + $(data).find('fare').text() + '</p>';
                 txt += '<small>From ' + origin + ' to ' + dest + '</small>';
                 $info.empty().append( txt );
                 console.log( 'fare : $' + $(data).find('fare').text() );
+                thisCache.fadeOut(400).removeClass('button-warning').fadeIn();
             });
         });
+
+        $arrive.click( function() {
+            var url = 'http://api.bart.gov/api/sched.aspx?cmd=arrive&orig=' + origin + '&dest=' + dest,
+                thisCache = $(this);
+
+            url += '&date=now&b=2&a=2&l=1';
+            thisCache.addClass('button-warning');
+            $.get( url, function( data ) {
+
+                console.log(  data );
+                thisCache.fadeOut(400).removeClass('button-warning').fadeIn();
+            });            
+
+        });
+
 
     });
 
