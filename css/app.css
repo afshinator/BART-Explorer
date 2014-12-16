@@ -1,17 +1,21 @@
-
+/*
+ * afshin's super cool bart app
+ */
+ 
 
 .locator {
     position: absolute;
     width: 100px;
     height: 80px;
 
-background: -moz-radial-gradient(center, ellipse cover,  rgba(176,212,227,1) 0%, rgba(136,186,207,0.58) 100%);
-background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(176,212,227,1)), color-stop(100%,rgba(136,186,207,0.58)));
-background: -webkit-radial-gradient(center, ellipse cover,  rgba(176,212,227,1) 0%,rgba(136,186,207,0.58) 100%);
-background: -o-radial-gradient(center, ellipse cover,  rgba(176,212,227,1) 0%,rgba(136,186,207,0.58) 100%);
-background: -ms-radial-gradient(center, ellipse cover,  rgba(176,212,227,1) 0%,rgba(136,186,207,0.58) 100%);
-background: radial-gradient(ellipse at center,  rgba(176,212,227,1) 0%,rgba(136,186,207,0.58) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b0d4e3', endColorstr='#9488bacf',GradientType=1 );
+background: -moz-radial-gradient(center, ellipse cover,  rgba(176,212,227,1) 0%, rgba(136,186,207,0.85) 100%);
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(176,212,227,1)), color-stop(100%,rgba(136,186,207,0.85)));
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(176,212,227,1) 0%,rgba(136,186,207,0.85) 100%);
+background: -o-radial-gradient(center, ellipse cover,  rgba(176,212,227,1) 0%,rgba(136,186,207,0.85) 100%);
+background: -ms-radial-gradient(center, ellipse cover,  rgba(176,212,227,1) 0%,rgba(136,186,207,0.85) 100%);
+background: radial-gradient(ellipse at center,  rgba(176,212,227,1) 0%,rgba(136,186,207,0.85) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b0d4e3', endColorstr='#d988bacf',GradientType=1 );
+
 
 -webkit-border-radius: 7px 7px 7px 7px;
 border-radius: 7px 7px 7px 7px;
