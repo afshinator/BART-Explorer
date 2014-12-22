@@ -90,7 +90,6 @@ $(function() {
 
   var popUps = function() {
     var popUpList = [],
-
       createAt = function( x, y, msg, who ) { 
         var aPopUp = {
             msg : msg,
@@ -108,17 +107,19 @@ $(function() {
         aPopUp.el = el$;
         popUpList.push( aPopUp );
 
-        if ( popUpList.length === 1 ) setupBrowserResizeHandler( redrawAll );
         return (popUpList.length - 1);
       },
-      redrawAll = function() { console.log('redrawAll() called.'); },
+      redrawAll = function() { console.log('eraseAll() called.'); },
       eraseAll = function() { 
         for (var i = popUpList.length - 1; i >= 0; i-- ) {
           popUpList[i].el.remove();
           popUpList.pop();
         }
       },
-      hideAll = function() { };
+      hideAll = function() { },
+      init = function() {
+        setupBrowserResizeHandler( eraseAll );
+      }();
 
 
     return {
